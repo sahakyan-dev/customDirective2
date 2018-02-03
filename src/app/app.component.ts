@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import { GetWidthService } from './get-width.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private getWidthService: GetWidthService) {
+  }
+  @HostListener('window:resize')
+  onResize() {
+    this.getWidthService.getScreenSize(window.innerWidth);
+  }
 }
